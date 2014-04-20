@@ -45,7 +45,7 @@ def validate_inputs(empirical_gibbs_risk, empirical_disagreement=None, m=None, K
 def c_bound_third_form(gibbs_risk, disagreement):
     """
     Compute the C-bound according to the Gibbs risk and
-    the expected disagreement of a weighted set of voters
+    the expected disagreement of a weighted set of voters.
     """
     return 1.0 - (1.0 - 2*gibbs_risk)**2 / (1.0 - 2*disagreement)
 
@@ -114,9 +114,9 @@ def solve_kl_inf(q, right_hand_side):
 def maximize_c_bound_under_constraints(empirical_disagreement, empirical_joint_error, right_hand_side, sup_joint_error=0.5):
     """
     maximize F(d,e) such that:
-        kl( d,e || x,y ) <= right_hand_side
-        2*e + d < 1 (i.e., Gibbs risk less than 1/2)
-        d <= 2*[sqrt(e)-e] (i.e., the variance of M_Q is positive)
+        kl( empirical_disagreement, empirical_joint_error || d,e ) <= right_hand_side
+        2*e + d < 1 (i.e., the Gibbs risk is less than 1/2)
+        d <= 2*[sqrt(e)-e] (i.e., the margin variance is positive)
         e <= sup_joint_error (default: 0.5; used by PAC-Bound 2 prime)
     """
 

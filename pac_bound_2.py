@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-""" pac_bound_two...) function.
+""" pac_bound_two(...) function.
 This file can be imported in your python project or executed as a command-line script.
 
 See the related paper:

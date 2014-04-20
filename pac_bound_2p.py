@@ -19,8 +19,7 @@ def pac_bound_two_prime(empirical_gibbs_risk, empirical_disagreement, m, KLQP, d
     Compute a PAC-Bayesian upper bound on the Bayes risk by
     using the C-Bound. To do so, we bound *simultaneously*
     the disagreement and the joint error, and we add a
-    constraint a bound on the joint error by bounding its
-    value individually.
+    constraint by computing another bound on the joint error.
 
     empirical_gibbs_risk : Gibbs risk on the training set
     empirical_disagreement : Expected disagreement on the training set
