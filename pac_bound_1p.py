@@ -4,7 +4,7 @@ This file can be imported in your python project or executed as a command-line s
 
 See the related paper:
 Risk Bounds for the Majority Vote: From a PAC-Bayesian Analysis to a Learning Algorithm
-by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
 http://graal.ift.ulaval.ca/majorityvote/
 """
@@ -14,7 +14,7 @@ from pac_bound_tools import validate_inputs, xi, solve_kl_inf, solve_kl_sup, c_b
 from math import log
 
 def pac_bound_one_prime(empirical_gibbs_risk, empirical_disagreement, m, m_prime, KLQP, delta=0.05):
-    """ PAC Bound ONE PRIME of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+    """ PAC Bound ONE PRIME of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
     Compute a *semi-supervised* PAC-Bayesian upper bound on the Bayes risk by
     using the C-Bound on an upper bound on the Gibbs risk (using m *labeled* examples)
@@ -23,12 +23,12 @@ def pac_bound_one_prime(empirical_gibbs_risk, empirical_disagreement, m, m_prime
     empirical_gibbs_risk : Gibbs risk on the training set
     empirical_disagreement : Expected disagreement on the training set
     m : number of *labeled* training examples
-    m_prime : number of *unlabeld* training examples
+    m_prime : number of *unlabeled* training examples
     KLQP : Kullback-Leibler divergence between prior and posterior
     delta : confidence parameter (default=0.05)
     """
     if not validate_inputs(empirical_gibbs_risk, empirical_disagreement, m, KLQP, delta): return 1.0
-    if m_prime <=0: print 'INVALID INPUT: m_prime must be strictly postive.';  return 1.0
+    if m_prime <=0: print 'INVALID INPUT: m_prime must be strictly postive.'; return 1.0
 
     xi_m = xi(m)
     right_hand_side = ( KLQP + log( 2 * xi_m / delta ) ) / m

@@ -1,7 +1,7 @@
 Majority Vote Bounds
 ====================
 
-PAC-Bayesian bounds computation related to an upcoming journal paper (see [1])
+PAC-Bayesian bounds computation related to a JMLR paper (see [1], or http://www.jmlr.org/papers/v16/germain15a.html)
 
 ## Dependencies
 This Python code depends on numpy and scipy librairies
@@ -25,7 +25,7 @@ $ python pac_bound_2.py
 ----------------------------------------------------------------------------------------------------
 Usage: pac_bound_2.py empirical_gibbs_risk empirical_disagreement [m] [KLQP] [delta]
 ----------------------------------------------------------------------------------------------------
-  PAC Bound TWO of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+  PAC Bound TWO of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
     Compute a PAC-Bayesian upper bound on the Bayes risk by
     using the C-Bound. To do so, we bound *simultaneously*
@@ -48,4 +48,7 @@ bayes risk bound = 0.360433
 ```
 
 ## References
-[1] Pascal Germain, Alexandre Lacasse, François Laviolette, Mario Marchand and Jean-Francis Roy. "Risk Bounds for the Majority Vote: From a PAC-Bayesian Analysis to a Learning Algorithm". Accepted for publication in the Journal of Machine Learning Research, 2014.
+[1] Pascal Germain, Alexandre Lacasse, François Laviolette, Mario Marchand and Jean-Francis Roy. 
+"Risk Bounds for the Majority Vote: From a PAC-Bayesian Analysis to a Learning Algorithm". 
+Journal of Machine Learning Research (JMLR), volume 16 (Apr) p. 787-860, 2015.
+http://www.jmlr.org/papers/v16/germain15a.html

@@ -4,7 +4,7 @@ Various functions imported by bound computation files pac_bound_{0,1,1p,2,2p}.py
 
 See the related paper:
 Risk Bounds for the Majority Vote: From a PAC-Bayesian Analysis to a Learning Algorithm
-by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
 http://graal.ift.ulaval.ca/majorityvote/
 """
@@ -77,7 +77,7 @@ def KL_binomial(q, p):
 
 def KL_trinomial(q1, q2, p1, p2):
     """
-    Compute the KL-divergence between two mutinomial distributions (Q and P)
+    Compute the KL-divergence between two multinomial distributions (Q and P)
     with three possible events, where Q=(q1,q2,1-q1-q2), P=(p1,p2,1-p1-p2).
     """
     return KL([q1, q2, 1.-q1-q2], [p1, p2,  1.-p1-p2])
@@ -103,7 +103,7 @@ def solve_kl_inf(q, right_hand_side):
         kl( q || x ) = right_hand_side
         x < q
     """
-    f  = lambda x: KL_binomial(q, x) - right_hand_side
+    f = lambda x: KL_binomial(q, x) - right_hand_side
 
     if f(1e-9) <= 0.0:
         return 1e-9
@@ -121,14 +121,14 @@ def maximize_c_bound_under_constraints(empirical_disagreement, empirical_joint_e
     """
 
     # Objective function
-    obective_fct = lambda e,d  : -1 * c_bound_third_form(e+d/2, d)
+    objective_fct = lambda e,d: -1 * c_bound_third_form(e+d/2, d)
 
     # Domain constraint given by the KL-divergence
-    domain_fct = lambda e,d : KL_trinomial(empirical_joint_error, empirical_disagreement, e, d) - right_hand_side
+    domain_fct = lambda e,d: KL_trinomial(empirical_joint_error, empirical_disagreement, e, d) - right_hand_side
 
     # If the constraint 2*e + d < 1 crosses the domain, the bound is trivial
     if empirical_disagreement > 0.0:
-        if domain_fct( (1.0-empirical_disagreement)/2, empirical_disagreement) < 0.0 :
+        if domain_fct( (1.0-empirical_disagreement)/2, empirical_disagreement) < 0.0:
             return 1.0
 
     # Find max value of joint error inside the domain
@@ -138,22 +138,22 @@ def maximize_c_bound_under_constraints(empirical_disagreement, empirical_joint_e
     e_max = min( e_max, sup_joint_error)
 
     # Given a fixed value of joint error, maximize the objective under the domain constraints
-    def mimimize_obj_given_e(_e):
-        obective_fct_fixed_e = lambda d : obective_fct(_e, d)
-        domain_fct_fixed_e = lambda d : domain_fct(_e, d)
+    def minimize_obj_given_e(_e):
+        objective_fct_fixed_e = lambda d: objective_fct(_e, d)
+        domain_fct_fixed_e = lambda d: domain_fct(_e, d)
 
         d_min = 0.
         d_max = 2 * (sqrt(_e) - _e)
         d_inside_domain = find_d_minimizing_KL_given_e(_e)
-        if empirical_disagreement > 0. :
+        if empirical_disagreement > 0.:
             d_min = optimize.brentq(domain_fct_fixed_e, 1e-9, d_inside_domain)
-        if domain_fct_fixed_e(d_max) > 0. :
+        if domain_fct_fixed_e(d_max) > 0.:
             d_max = optimize.brentq(domain_fct_fixed_e, d_inside_domain, d_max)
 
-        optimal_d = optimize.fminbound( obective_fct_fixed_e, d_min, d_max)
-        return obective_fct(_e, optimal_d)
+        optimal_d = optimize.fminbound( objective_fct_fixed_e, d_min, d_max)
+        return objective_fct(_e, optimal_d)
 
     # Solve the optimization problem!
-    obj_value = optimize.fminbound( mimimize_obj_given_e, empirical_joint_error, e_max, full_output=True)[1]
+    obj_value = optimize.fminbound( minimize_obj_given_e, empirical_joint_error, e_max, full_output=True)[1]
     return -1 * obj_value
 

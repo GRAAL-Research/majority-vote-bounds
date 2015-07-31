@@ -4,7 +4,7 @@ This file can be imported in your python project or executed as a command-line s
 
 See the related paper:
 Risk Bounds for the Majority Vote: From a PAC-Bayesian Analysis to a Learning Algorithm
-by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+by Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
 http://graal.ift.ulaval.ca/majorityvote/
 """
@@ -14,7 +14,7 @@ from pac_bound_tools import validate_inputs, xi, solve_kl_sup, maximize_c_bound_
 from math import log
 
 def pac_bound_two_prime(empirical_gibbs_risk, empirical_disagreement, m, KLQP, delta=0.05):
-    """ PAC Bound TWO PRIME of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR, 2014)
+    """ PAC Bound TWO PRIME of Germain, Lacasse, Laviolette, Marchand and Roy (JMLR 2015)
 
     Compute a PAC-Bayesian upper bound on the Bayes risk by
     using the C-Bound. To do so, we bound *simultaneously*
