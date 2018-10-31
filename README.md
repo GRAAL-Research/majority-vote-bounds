@@ -3,6 +3,8 @@ Majority Vote Bounds
 
 PAC-Bayesian bounds computation related to a JMLR paper (see [1], or http://www.jmlr.org/papers/v16/germain15a.html)
 
+For the *MinCq* learning algorithm implementation, go to: https://github.com/GRAAL-Research/MinCq
+
 ## Dependencies
 This Python code depends on numpy and scipy librairies
 
